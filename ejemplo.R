@@ -1,0 +1,1 @@
+print("abre un script nuevo, haz cambios, Ctrl+S para guardar")
