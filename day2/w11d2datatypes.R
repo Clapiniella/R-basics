@@ -1,4 +1,4 @@
-# WEEK 11 - day 2
+# WEEK 11 - day 2 DATATYPES
 
 
 # Si necesitas informacion sobre una funcion
@@ -425,6 +425,28 @@ lista_curso[['vector']] <- NULL
 
 # revisar que no este el vector
 lista_curso
+
+
+## OTRAS FUNCIONES DE INTERES PARA LISTAS
+
+li <- list(log = TRUE,
+           ch= "hello",
+           int_vec = sort(rep(seq(8,2,by=-2),times=2)))
+
+is.list(li)
+
+is.list(c(1,3,4))
+
+li2 <- as.list(c(1,2,4))
+
+is.list(li2)
+
+#unlist(li)
+
+str(append(li,rev(li)))
+
+str(rev(li))
+
 
 
 
