@@ -1,5 +1,8 @@
 # WEEK 11 - day 2 FUNCTIONS
 
+# si queremos eliminar una variable
+# rm()
+
 ############
 # IF/ELSE  #
 ############
@@ -30,6 +33,7 @@ linkedin[linkedin > facebook]
 ## EJEMPLO MATRIZ
 
 views <- matrix(c(linkedin, facebook), nrow = 2, byrow = TRUE)
+# tambien se puede utilizar dimnames 
 rownames(views) <- c("linkedin", "facebook")
 colnames(views) <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 views
@@ -45,16 +49,22 @@ views <= 14
 v = c(14,7,6,9,2)
 ifelse(v %% 2 == 1,"odd","even")
 
+# Aportacion de Monica ¡gracias Monica!
+# En la función Ifelse el segundo parámetro (else) puede ser llamar otra vez 
+# a la función ifelse. Así se puede usar esa función evaluando más de una cosa
+
+ifelse(v %% 2 == 1, "odd", ifelse(v ==2, "es igual a dos y par", "even"))
 
 ## IF/ELSE
 
 ifi <- 42
-
+# todo detras del if y antes de la llave con parentesis 
+# antes de los else vaya una llave
 if (ifi < 0) {
   print("Negative number")
-} else if (ifi > 0 & ifi < 50) {
+  } else if (ifi > 0 & ifi < 50) {
   print("Mi numero")
-} else
+  } else 
   print("Zero")
 
 
@@ -62,10 +72,15 @@ if (ifi < 0) {
 # FOR  #
 ########
 
-# EJEMPLO BREAK
-
 cities <- c("New York", "Paris", "London", "Tokyo", "Rio de Janeiro", "Cape Town")
 
+for (city in cities) {
+  print(city)
+}
+
+# EJEMPLO BREAK
+
+# nchar cuenta las letras de una palabra
 for (city in cities){
   if(nchar(city)==6){
     break
@@ -81,6 +96,7 @@ for (city in cities){
   }
   print(city)
 }
+
 
 #The break statement abandons the active loop: 
 #the remaining code in the loop is skipped and the loop is not iterated over anymore.
@@ -99,6 +115,8 @@ values <- c("O", NA, "X", NA, "O", "O", "X", NA, "X")
 ttt <- matrix(values, nrow = 3, byrow = TRUE)
 ttt
 
+
+
 # define the double for loop the tic-tac-toe matrix
 for (i in 1:nrow(ttt)) {
   for (j in 1:ncol(ttt)) {
@@ -106,10 +124,10 @@ for (i in 1:nrow(ttt)) {
   }
 }
 
-
 # EJEMPLO FOR E IF/ELSE
-
+linkedin
 for (li in linkedin) {
+  print(li)
   if (li > 10) {
     print("You're popular!")
   } else {
@@ -123,7 +141,6 @@ for (li in linkedin) {
     print("This is too embarrassing!")
     next
   }
-  print(li)
 }
 
 # OTRO EJEMPLO FOR E IF/ELSE
@@ -155,7 +172,7 @@ i <- 1
 
 while (i <= 10) {
   print(3*i)
-  if (3*i %% 8 ==0) {
+  if (3*i %% 8 == 0) {
     print(paste(i*3, "is divisible by 8"))
     break
   }
@@ -164,7 +181,7 @@ while (i <= 10) {
 
 # CONTROL DE VELOCIDAD
 
-speed <- 88
+speed <- 45
 
 while (speed > 30) {
   print(paste("Your speed is", speed))
@@ -183,7 +200,7 @@ while (speed > 30) {
   }
 }
 
-
+speed
 
 ##############
 # FUNCTIONS  #
@@ -193,37 +210,56 @@ while (speed > 30) {
 # por favor, respuestas :) 
 
 
+mi_funcion <- function(){
+  "hola"
+}
+
+mi_funcion()
+
 # una funcion que dados dos numeros, devuelva la suma
 
-adding <- function(x, y){
+adding1 <- function(cualquier_numero){
+  cualquier_numero+2
+}
+
+adding1(5)
+
+adding2 <- function(x, y){
   x+y 
 }
 
+adding2(3,9)
+
 # dado un vector nos devuelva los valores por encima de 10
 
-above10 <- function(x){
-  use <- x > 10
-  x[use]
+above10 <- function(v){
+  use <- v > 10
+  v[use]
 }
+
+above10(7:13)
 
 # dado un vector nos devuelva los valores mayores a un numero dado
 # valor por defecto 10
 
-above <- function(x, n = 10){
+above <- function(x, n=10){
   use <- x > n
   x[use]
 }
+
+above(1:12)
 
 # antes de seguir
 # puede sernos de gran utilidad en el ejemplo siguiente
 
 values_w <- c(1,2,3,4,5)
-values <- c(1,4,5,NA)
+values <- c(1,4,5,NaN)
 
 # calculamos su desviacion estandar
 
 sd(values_w)
 sd(values)
+class(sd(values))
 
 # elimina los nan
 sd(values, na.rm=TRUE)
@@ -233,12 +269,14 @@ sd(values, na.rm=TRUE)
 
 columnmean <- function(y, removeNA = TRUE) {
   nc <- ncol(y)
+  # otra manera de crear un vector vacio
   means <- numeric(nc)
   for(i in 1:nc){
     means[i] <- mean(y[,i], na.rm = removeNA)
   }
   means
 }
+
 columnmean(airquality)
 
 # dado un numero devuelve su cuadrado
@@ -250,14 +288,17 @@ pow_two <- function(x, print_info = TRUE) {
   }
   return(y)
 }
+# el return en R lleva parentesis
 
-# tira dos dados
+# tira el dado
 
 dado <- function() {
   posibilidades <- 1:6
   dice <- sample(posibilidades, size = 1)
   dice
 }
+
+dado()
 
 
 # define una funcion que dado un numero me devuelva un mensaje
@@ -283,16 +324,16 @@ interpret_all <- function(views, return_sum=TRUE) {
   
   if (return_sum==TRUE) {
     return(count)
-    
   } else {
     return(NULL)
   }
 }
 
+
 # pruebo con los vectores linkedin y facebook
 
 interpret_all(linkedin)
-interpret_all(facebook)
+interpret_all(facebook, FALSE)
 
 
 #################
@@ -311,21 +352,34 @@ split_low <- lapply(split_math, tolower)
 ## FUNCIONES ANÓNIMAS
 
 # funcion normal
-triple <- function(x) { 3 * x }
+triple <- function(x) {
+  3 * x 
+  }
 
 # funcion anonima 
 function(x) { 3 * x }
 
 # utiliza la funcion anonima con un lapply
-lapply(c(1,2,3), function(x) { 3 * x })
+lista_jl <- lapply(c(1,2,3), function(x) { 3 * x })
+lista_jl
 
 
 # aplicar la funcion class a todos los elementos de una lista 
 
-nyc <- list(pop = 8405837,
+nyc <- list(8405837,
             boroughs = c("Manhattan", "Bronx", "Brooklyn",
                          "Queens", "Staten Island"),
             capital = FALSE)
+
+# si quiero acceder al 8405837
+nyc[[1]]
+# si quiero acceder al FALSE
+nyc[[3]]
+nyc[['capital']]
+nyc$capital
+# para acceder a Bronx
+nyc[[2]][2]
+
 
 class(nyc)
 
@@ -336,6 +390,8 @@ lapply(nyc,class)
 
 # para convertir una lista a un vector
 unlist(lapply(split_math, nchar))
+
+# nchar(c("GAUSS", "1777"))
 
 # alternativa (vector/matriz)
 sapply(split_math, nchar)
@@ -349,16 +405,18 @@ bajocero <- function(x) {
   return(x[x < 0])
 }
 
+#### The sapply() function doesn’t always return a vector. 
+#### In fact, the standard output of sapply is a list, but that list 
+####gets simplified to either a matrix or a vector if possible.
+
 # Con sapply(): freezing_s
 freezing_s <- sapply(temp, bajocero)
-
 
 # Con lapply(): freezing_l
 freezing_l <- lapply(temp, bajocero)
 
 # ¿Son iguales?
 identical(freezing_l, freezing_s)
-
 
 # queremos que nos avise de la temperatura media
 print_info <- function(x) {
@@ -371,11 +429,30 @@ sapply(temp, print_info)
 # Con lapply()
 lapply(temp, print_info)
 
+class()
+typeof(4+4)
+
+typeof(4+4L)
 
 
 # time to kahoot! 
+# duda 1
+y <- c(2,3,4,5,6)
+x <- list(2, letra = "a", "b", TRUE)
 
+is.list(x[2])
 
+is.character(x[[2]])
 
+x[[1]] + 2
 
+# duda 2
+x <- 1:10
 
+x[x < 6] <- 0
+
+x <- 0
+x = 0
+0 -> x
+
+x == 0
