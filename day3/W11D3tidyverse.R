@@ -78,7 +78,9 @@ gapminder %>%
 # menor o igual a 40 y el año en 2002
 gapminder %>% 
   filter(lifeExp <= 40, year == 2002)
-################ añadir lo de | y &
+
+# ejemplo para añadir or  |
+# filter(starwars, hair_color == "none" | eye_color == "black")
 
 #####################
 # arrange con dplyr #
